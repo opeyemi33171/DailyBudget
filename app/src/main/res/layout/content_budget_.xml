@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.opeyemi.dailybudget.Budget_Activity"
+    tools:showIn="@layout/activity_budget_">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="250dp"
+        app:cardBackgroundColor="#85CC80"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="4dp"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#66B266"
+        android:layout_marginTop="210dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="£560.00 spent"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="£0.00 income"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="180dp"/>
+
+     </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/balanceEntryListView"
+        ></ListView>
+</RelativeLayout>
