@@ -1,20 +1,27 @@
 package com.example.opeyemi.dailybudget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.opeyemi.dailybudget.com.example.opeyemi.adapters.BalanceEntryListViewAdapter;
 import com.example.opeyemi.dailybudget.com.example.opeyemi.datamodel.BalanceEntry;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 public class Budget_Activity extends AppCompatActivity {
+
+   public static Double budget = 400D;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,49 +32,46 @@ public class Budget_Activity extends AppCompatActivity {
 
         toolbar.setTitle("Your balance");
 
+        final TextView budgetTextview = (TextView)findViewById(R.id.budget);
+        budgetTextview.setText(budget.toString());
+
 
         final ArrayList<BalanceEntry> entries = new ArrayList<>();
-        BalanceEntryListViewAdapter adapter = new BalanceEntryListViewAdapter(this, entries);
-        ListView balanceEntryListView = (ListView)findViewById(R.id.balanceEntryListView);
+        final BalanceEntryListViewAdapter adapter = new BalanceEntryListViewAdapter(this, entries);
+        final ListView balanceEntryListView = (ListView)findViewById(R.id.balanceEntryListView);
 
         balanceEntryListView.setAdapter(adapter);
 
-        entries.add(new BalanceEntry(200D));
-        entries.add(new BalanceEntry(300D));
-        adapter.notifyDataSetChanged();
+
+
+
 
         //when you debug get rid if the linearlayout in balance_entry and try with just a listview.
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
+                Intent navBalanceEntryActivity = new  Intent(Budget_Activity.this, Balance_Entry_Activity.class) ;
+                startActivity(navBalanceEntryActivity);
 
+                try {
+                    budget = getIntent().getExtras().getDouble("NewBudget");
+                    budgetTextview.setText(budget.toString());
+
+
+                    entries.add(Balance_Entry_Activity.entry);
+                    adapter.notifyDataSetChanged();
+
+                }
+                catch (Exception e ){}
             }
         });
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_budget_, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

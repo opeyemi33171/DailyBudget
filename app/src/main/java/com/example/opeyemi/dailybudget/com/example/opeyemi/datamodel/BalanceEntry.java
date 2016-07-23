@@ -1,9 +1,11 @@
 package com.example.opeyemi.dailybudget.com.example.opeyemi.datamodel;
 
+import java.io.Serializable;
+
 /**
  * Created by opeyemi on 10/07/2016.
  */
-public class BalanceEntry {
+public class BalanceEntry implements Serializable {
 
     public Boolean getIncome() {
         return isIncome;
@@ -38,7 +40,8 @@ public class BalanceEntry {
     public BalanceEntry(){
 
     }
-     public  BalanceEntry(Double amount){
+     public  BalanceEntry(Double amount, Boolean isIncome){
+         this.isIncome = isIncome;
          this.amount = amount;
      }
 
